@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block styles %}
+<style>
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+  }
+  .card {
+    max-width: 400px;
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background-color: #5cb85c;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+    padding: 20px;
+  }
+  .card-body {
+    padding: 30px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-control {
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  button[type=submit] {
+    background-color: #5cb85c;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+  }
+  button[type=submit]:hover {
+    background-color: #4cae4c;
+  }
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="card">
+    <div class="card-header">Register</div>
+    <div class="card-body">
+      {% if error_message %}
+      <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+      {% endif %}
+      <form method="post" onsubmit="return authenticatePassword()">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password1">Password</label>
+          <input type="password" class="form-control" id="password1" name="password1" required>
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input type="password" class="form-control" id="password2" name="password2" required>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function authenticatePasswordPassword() {
+    var password1 = document.getElementById('password1').value;
+    var password2 = document.getElementById('password2').value;
+    var passwordPattern = /^[A-Z].{6,8}[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]$/;
+
+    if (!passwordPattern.test(password1)) {
+      alert('Password must start with a capital letter, be 8-10 characters long, and end with a set of symbols.');
+      return false;
+    }
+
+    if (password1 !== password2) {
+      alert('Passwords do not match.');
+      return false;
+    }
+
+    return true;
+  }
+</script>
+{% endblock %}
