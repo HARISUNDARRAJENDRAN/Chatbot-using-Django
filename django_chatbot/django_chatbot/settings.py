@@ -7,7 +7,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-wsa9k4v_goql%t8rn@q
 
 DEBUG = True  # Set to False in production
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # Add production host(s) here when deploying
+ALLOWED_HOSTS =['chatbot-using-django.onrender.com', 'localhost', '127.0.0.1'] # Add production host(s) here when deploying
 
 INSTALLED_APPS = [
     'django.contrib.admin',
