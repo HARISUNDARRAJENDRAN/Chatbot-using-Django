@@ -8,7 +8,7 @@ from django.utils import timezone
 from .models import Chat
 
 # API credentials
-awanllm_api_key = '781c6558-07e1-40ea-bfa9-046328920b13'
+awanllm_api_key = 'YOUR_API_KEY'
 awanllm_url = 'https://api.awanllm.com/v1/chat/completions'
 
 # Function to interact with the Awanllm API
